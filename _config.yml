@@ -2,8 +2,8 @@ title: Script Notes
 description: 使ったことのあるスクリプトを整理して公開する個人サイト
 lang: ja
 timezone: Asia/Tokyo
-url: ""
-baseurl: ""
+url: "https://Mr-129.github.io"
+baseurl: "/homepage"
 markdown: kramdown
 permalink: pretty
 author: Your Name
