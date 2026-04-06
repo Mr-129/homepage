@@ -1,0 +1,16 @@
+# Jekyll build output and caches
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby/Bundler local state
+.bundle/
+vendor/
+vendor/bundle/
+.ruby-lsp/
+.yardoc/
+
+# Windows local files
+Thumbs.db
+Desktop.ini

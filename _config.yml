@@ -1,0 +1,36 @@
+title: Script Notes
+description: 使ったことのあるスクリプトを整理して公開する個人サイト
+lang: ja
+timezone: Asia/Tokyo
+url: ""
+baseurl: ""
+markdown: kramdown
+permalink: pretty
+author: Your Name
+theme_stylesheet: /assets/css/themes/copper-file.css
+
+collections:
+  scripts:
+    output: true
+    permalink: /scripts/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
+  - scope:
+      path: ""
+      type: "scripts"
+    values:
+      layout: script
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - templates/
+  - docs/
