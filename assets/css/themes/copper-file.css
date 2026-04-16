@@ -1,18 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inconsolata:wght@400;600&display=swap');
+/* ===================================
+   Copper File — モダン書庫テーマ
+   =================================== */
 
 :root {
-  --bg: #f2e9e0;
-  --bg-accent: #e4d1c2;
-  --surface: rgba(255, 250, 246, 0.92);
-  --surface-strong: #fff8f3;
-  --line: rgba(101, 63, 42, 0.18);
+  --bg: #f5ede4;
+  --bg-accent: #e8dace;
+  --surface: rgba(255, 250, 245, 0.95);
+  --surface-strong: #fff9f4;
+  --line: rgba(101, 63, 42, 0.16);
   --text: #2e1d17;
-  --muted: #785749;
+  --muted: #7a5e4e;
   --accent: #b9683c;
   --accent-deep: #7b3b1d;
-  --accent-soft: #f2d8cb;
-  --shadow: 0 24px 54px rgba(66, 35, 21, 0.12);
-  --radius-lg: 18px;
+  --accent-soft: rgba(185, 104, 60, 0.1);
+  --shadow: 0 8px 32px rgba(66, 35, 21, 0.1);
+  --shadow-sm: 0 2px 8px rgba(66, 35, 21, 0.06);
+  --radius-lg: 16px;
   --radius-md: 12px;
   --radius-sm: 8px;
 }
@@ -20,10 +23,9 @@
 body {
   font-family: 'Manrope', sans-serif;
   background:
-    linear-gradient(90deg, rgba(123, 59, 29, 0.05) 0, rgba(123, 59, 29, 0.05) 1px, transparent 1px, transparent 120px),
-    radial-gradient(circle at top right, rgba(185, 104, 60, 0.16), transparent 30%),
-    radial-gradient(circle at left 18%, rgba(123, 59, 29, 0.08), transparent 24%),
-    linear-gradient(180deg, #fbf5ef 0%, var(--bg) 100%);
+    radial-gradient(ellipse at top right, rgba(185, 104, 60, 0.12), transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(123, 59, 29, 0.06), transparent 50%),
+    linear-gradient(180deg, #faf5ef 0%, var(--bg) 100%);
 }
 
 code,
@@ -31,25 +33,22 @@ pre {
   font-family: 'Inconsolata', monospace;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 25%),
-    repeating-linear-gradient(180deg, transparent 0, transparent 38px, rgba(123, 59, 29, 0.025) 38px, rgba(123, 59, 29, 0.025) 39px);
-  opacity: 0.7;
+pre {
+  background: #1a130d;
+  border: 1px solid rgba(185, 104, 60, 0.15);
 }
 
+/* Page frame & structure */
 .page-frame {
   position: relative;
 }
 
+/* Header — 書庫の棚ヘッダー風 */
 .site-header {
-  background: rgba(248, 240, 232, 0.86);
-  border-bottom: 1px solid rgba(123, 59, 29, 0.2);
-  box-shadow: 0 12px 24px rgba(66, 35, 21, 0.05);
+  background: rgba(250, 243, 234, 0.9);
+  border-bottom: 1px solid rgba(123, 59, 29, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 4px rgba(66, 35, 21, 0.06);
 }
 
 .header-inner,
@@ -58,57 +57,54 @@ body::before {
 }
 
 .site-brand {
-  gap: 0.9rem;
-  letter-spacing: 0.02em;
+  gap: 0.8rem;
+  letter-spacing: 0.01em;
 }
 
 .site-brand-mark {
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 0.7rem;
-  background: linear-gradient(180deg, #cb8354 0%, #9d5531 100%);
-  border: 1px solid rgba(123, 59, 29, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #cb8354, #8f4520);
+  border: 1px solid rgba(123, 59, 29, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 4px rgba(66, 35, 21, 0.15);
+  font-size: 0.82rem;
 }
 
 .site-brand-text {
-  font-size: 1.02rem;
-}
-
-.site-nav {
-  gap: 0.65rem;
+  font-size: 1rem;
 }
 
 .site-nav a {
-  padding: 0.5rem 0.85rem;
-  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
   border: 1px solid transparent;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .site-nav a:hover {
-  background: rgba(185, 104, 60, 0.09);
-  border-color: rgba(123, 59, 29, 0.12);
+  background: rgba(185, 104, 60, 0.08);
+  border-color: rgba(123, 59, 29, 0.1);
 }
 
-.hero {
-  padding-top: 3.3rem;
+.site-nav a[aria-current="page"] {
+  background: rgba(185, 104, 60, 0.12);
+  border-color: rgba(123, 59, 29, 0.18);
+  color: var(--accent-deep);
 }
 
+/* Card system — インデックスカード風 */
 .hero-panel,
 .content-card,
 .info-card,
 .script-card {
   position: relative;
-  overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 248, 243, 0.96)),
-    var(--surface);
-  border: 1px solid rgba(123, 59, 29, 0.18);
+  background: var(--surface);
+  border: 1px solid rgba(123, 59, 29, 0.14);
   box-shadow: var(--shadow);
 }
 
@@ -118,33 +114,32 @@ body::before {
 .script-card::before {
   content: '';
   position: absolute;
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(90deg, #d18b5a 0%, #8f4c2a 100%);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #cb8354 0%, #a45731 50%, #7b3b1d 100%);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
-.hero-panel::after,
-.content-card::after,
-.info-card::after,
-.script-card::after {
-  content: '';
-  position: absolute;
-  inset: 16px 16px auto auto;
-  width: 90px;
-  height: 90px;
-  background: radial-gradient(circle, rgba(185, 104, 60, 0.1) 0%, rgba(185, 104, 60, 0) 72%);
-  pointer-events: none;
+/* Hero */
+.hero {
+  padding-top: 3rem;
 }
 
 .hero-copy h1,
 .section-header h1 {
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.section-header h2 {
+  color: var(--text);
 }
 
 .eyebrow {
-  color: var(--accent-deep);
-  letter-spacing: 0.18em;
+  color: var(--accent);
+  letter-spacing: 0.16em;
 }
 
 .hero-copy p,
@@ -155,95 +150,143 @@ body::before {
   color: var(--muted);
 }
 
+/* Buttons */
 .button,
 .button-secondary {
-  min-height: 2.9rem;
-  border-radius: 0.85rem;
+  border-radius: 8px;
 }
 
 .button {
-  background: linear-gradient(180deg, #c57446 0%, #a45731 100%);
-  border: 1px solid rgba(123, 59, 29, 0.35);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: linear-gradient(180deg, #c07446 0%, #9c5230 100%);
+  border: 1px solid rgba(123, 59, 29, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), var(--shadow-sm);
 }
 
 .button:hover {
-  background: linear-gradient(180deg, #b9683c 0%, #8f4c2a 100%);
+  background: linear-gradient(180deg, #b46838 0%, #8f4520 100%);
 }
 
 .button-secondary {
-  background: rgba(255, 250, 246, 0.82);
-  border: 1px solid rgba(123, 59, 29, 0.18);
+  background: var(--surface);
+  border: 1px solid rgba(123, 59, 29, 0.16);
 }
 
 .button-secondary:hover {
-  background: rgba(185, 104, 60, 0.08);
+  background: rgba(185, 104, 60, 0.06);
 }
 
-.info-card,
-.content-card,
-.script-card {
-  backdrop-filter: blur(4px);
-}
-
+/* Metrics */
 .metric {
-  padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(123, 59, 29, 0.12);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(123, 59, 29, 0.1);
 }
 
+/* Tag badges */
 .card-meta li,
 .tag-list li {
-  background: rgba(185, 104, 60, 0.12);
+  background: rgba(185, 104, 60, 0.1);
   color: var(--accent-deep);
+  border: 1px solid rgba(185, 104, 60, 0.12);
 }
 
 .meta-list {
   gap: 0.7rem;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
 .meta-list li {
-  padding: 0.35rem 0.7rem;
+  padding: 0.3rem 0.65rem;
   border-radius: 999px;
-  background: rgba(123, 59, 29, 0.06);
+  background: rgba(123, 59, 29, 0.05);
 }
 
-.prose h2,
-.prose h3,
-.script-card h2 a,
-.back-link a {
+/* Script card heading */
+.script-card h2 a {
   color: var(--text);
 }
 
+.script-card h2 a:hover {
+  color: var(--accent-deep);
+}
+
+.back-link a {
+  color: var(--accent-deep);
+}
+
+/* Prose */
 .prose h2,
 .prose h3 {
-  letter-spacing: -0.02em;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.prose h2 {
+  border-bottom-color: rgba(123, 59, 29, 0.12);
 }
 
 .prose table thead {
+  background: rgba(185, 104, 60, 0.06);
+}
+
+/* Search & filter — テーマ色 */
+.search-input {
+  background: var(--surface);
+  border-color: rgba(123, 59, 29, 0.16);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(185, 104, 60, 0.12);
+}
+
+.tag-filter-btn {
+  border-color: rgba(123, 59, 29, 0.14);
+  background: rgba(255, 250, 245, 0.6);
+}
+
+.tag-filter-btn:hover {
   background: rgba(185, 104, 60, 0.08);
+  border-color: var(--accent);
 }
 
-pre {
-  border: 1px solid rgba(242, 216, 203, 0.24);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+.tag-filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
+/* Tag index page */
+.tag-nav-link {
+  background: rgba(185, 104, 60, 0.08);
+  border-color: rgba(123, 59, 29, 0.14);
+  color: var(--accent-deep);
+}
+
+.tag-nav-link:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.tag-section-heading {
+  border-bottom-color: rgba(185, 104, 60, 0.2);
+  color: var(--accent-deep);
+}
+
+/* Footer */
 .site-footer {
-  background: rgba(255, 248, 243, 0.82);
-  border-top: 1px solid rgba(123, 59, 29, 0.16);
+  background: rgba(250, 243, 234, 0.85);
+  border-top: 1px solid rgba(123, 59, 29, 0.12);
 }
 
+/* Hover effects */
+.content-card:hover,
+.script-card:hover {
+  box-shadow: var(--shadow), 0 0 0 2px rgba(185, 104, 60, 0.15);
+}
+
+/* Responsive */
 @media (max-width: 860px) {
   .site-nav a {
-    letter-spacing: 0.04em;
-  }
-
-  .hero-panel::after,
-  .content-card::after,
-  .info-card::after,
-  .script-card::after {
-    width: 70px;
-    height: 70px;
+    letter-spacing: 0.03em;
   }
 }

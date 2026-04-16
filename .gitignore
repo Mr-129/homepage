@@ -10,6 +10,7 @@ vendor/
 vendor/bundle/
 .ruby-lsp/
 .yardoc/
+draft-private/
 
 # Windows local files
 Thumbs.db

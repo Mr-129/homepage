@@ -26,7 +26,9 @@ bundle exec jekyll serve --host 127.0.0.1
 
 4. 公開設定の確認
 
- - 公開時の `url` / `baseurl` は `_config.publish-project.yml` を編集して実環境の値に合わせてください。
+ - 公開時の `url` / `baseurl` は `_config.yml` を編集して実環境の値に合わせてください。
+ - デプロイは GitHub Actions で自動実行されます（`main` ブランチへ push 時）。
+ - GitHub リポジトリの Settings → Pages → Source を **"GitHub Actions"** に設定してください。
 
 5. トラブルシュート
 

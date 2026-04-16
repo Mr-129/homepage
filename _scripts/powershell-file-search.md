@@ -5,6 +5,7 @@ language: PowerShell
 category: PowerShell
 environment: Windows PowerShell 5.1+
 updated_at: 2026-03-16
+published: true
 tags:
   - powershell
   - inventory

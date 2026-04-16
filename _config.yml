@@ -6,7 +6,7 @@ url: "https://Mr-129.github.io"
 baseurl: "/homepage"
 markdown: kramdown
 permalink: pretty
-author: Your Name
+author: Mr-129
 theme_stylesheet: /assets/css/themes/copper-file.css
 
 collections:
@@ -34,3 +34,4 @@ exclude:
   - README.md
   - templates/
   - docs/
+  - draft-private/

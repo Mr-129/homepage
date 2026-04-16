@@ -17,8 +17,8 @@ layout: default
     <div class="hero-side">
       <div class="info-card">
         <h2>現在の保管棚</h2>
-        <div class="metric"><span>Drawer 01</span><strong>PowerShell</strong></div>
-        <div class="metric"><span>Drawer 02</span><strong>いたずら用</strong></div>
+        <a class="metric metric-link" href="{{ '/scripts/?tag=powershell' | relative_url }}"><span>Drawer 01</span><strong>PowerShell</strong></a>
+        <a class="metric metric-link" href="{{ '/scripts/?tag=いたずら用' | relative_url }}"><span>Drawer 02</span><strong>いたずら用</strong></a>
         <div class="metric"><span>Expansion</span><strong>必要になったら棚を追加</strong></div>
       </div>
       <div class="info-card">
@@ -36,14 +36,14 @@ layout: default
     <p class="section-lead">細かく分類しすぎず、まずは PowerShell と いたずら用 の2区分で運用します。保管場所が増えるのは実データが増えてからで十分です。</p>
   </header>
   <div class="section-grid">
-    <article class="content-card">
+    <a class="content-card content-card-link" href="{{ '/scripts/?tag=powershell' | relative_url }}">
       <h2>PowerShell</h2>
       <p>日常作業、自動化、ファイル操作、確認系のスクリプトを保管する主棚です。再利用頻度が高いものを中心に残します。</p>
-    </article>
-    <article class="content-card">
+    </a>
+    <a class="content-card content-card-link" href="{{ '/scripts/?tag=いたずら用' | relative_url }}">
       <h2>いたずら用</h2>
       <p>軽い遊びやネタ用途のスクリプトを分けて置く補助棚です。本番用途の記録と混ざらないよう独立して扱います。</p>
-    </article>
+    </a>
     <article class="content-card">
       <h2>追加予定の棚</h2>
       <p>件数が増えた段階で、用途別や言語別の保管棚を追加します。最初から分けすぎず、取り出しにくくしない方針です。</p>

@@ -228,12 +228,11 @@ MVP の内容:
 
 GitHub 上で Pages を有効化する。
 
-選択肢:
+手順:
 
-1. ブランチから公開
-2. GitHub Actions で公開
-
-最初はブランチ公開で十分。独自ビルドや制約回避が必要になったら Actions に移行する。
+1. リポジトリの Settings → Pages を開く
+2. Source で **"GitHub Actions"** を選択する
+3. `main` ブランチに push すると自動でビルド・デプロイされる
 
 この段階の完了条件:
 
@@ -471,7 +470,7 @@ Windows で Ruby 未導入の場合は、先に RubyInstaller と Bundler の導
 
 実際にこのワークスペースで行った導入作業の記録は [docs/setup-log-2026-03-16.md](docs/setup-log-2026-03-16.md) を参照。
 
-公開先を最後に決める運用方針は [docs/publish-later-workflow.md](docs/publish-later-workflow.md) を参照。
+公開先の運用方針は [docs/publish-later-workflow.md](docs/publish-later-workflow.md) を参照。
 
 最終公開前の確認項目は [docs/release-checklist.md](docs/release-checklist.md) を参照。
 
@@ -483,4 +482,4 @@ Windows で Ruby 未導入の場合は、先に RubyInstaller と Bundler の導
 
 ## 11. 補足
 
-GitHub Pages の標準 Jekyll ビルドは便利だが、使えるプラグインやビルド自由度に制約がある。最初はその制約内で始め、必要になった時点で GitHub Actions ベースのデプロイに切り替えるのが現実的。
+このサイトは GitHub Actions による自動デプロイを採用しています。`main` ブランチに push すると自動で Jekyll ビルドとデプロイが実行されます。ワークフローの詳細は [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) を参照してください。

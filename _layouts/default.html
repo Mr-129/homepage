@@ -4,12 +4,14 @@
     {% include head.html %}
   </head>
   <body class="{{ page.body_class }}">
+    <a class="skip-link" href="#main-content">コンテンツへスキップ</a>
     <div class="page-frame">
       {% include site-header.html %}
-      <main class="page-main">
+      <main id="main-content" class="page-main">
         {{ content }}
       </main>
       {% include site-footer.html %}
     </div>
+    <script src="{{ '/assets/js/code-blocks.js' | relative_url }}"></script>
   </body>
 </html>

@@ -16,22 +16,14 @@
 
 ## 2. サイト設定確認
 
+- [_config.yml](../_config.yml) の `url` と `baseurl` が公開先に合っている
 - [_data/site_profile.yml](../_data/site_profile.yml) の情報が最終値になっている
-- ユーザーサイトかプロジェクトサイトかを決めている
-- 選んだ形式に対応する設定ファイルを更新済み
+- [.github/workflows/deploy-pages.yml](../.github/workflows/deploy-pages.yml) が正しく設定されている
 
 ## 3. 本番想定ビルド確認
 
-ユーザーサイトの場合:
-
 ```powershell
-bundle exec jekyll build --config _config.yml,_config.publish-user.yml
-```
-
-プロジェクトサイトの場合:
-
-```powershell
-bundle exec jekyll build --config _config.yml,_config.publish-project.yml
+bundle exec jekyll build
 ```
 
 ## 4. GitHub 側の準備
@@ -39,7 +31,7 @@ bundle exec jekyll build --config _config.yml,_config.publish-project.yml
 - 使う GitHub アカウントを決めている
 - 公開先リポジトリを作成済み
 - ローカルから push できる
-- GitHub Pages の公開元を決めている
+- GitHub Pages の Source を **"GitHub Actions"** に設定済み
 
 ## 5. ローカル Git 確認
 
