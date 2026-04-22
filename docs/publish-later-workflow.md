@@ -27,8 +27,9 @@ bundle exec jekyll serve --host 127.0.0.1
 
 1. ローカルで記事を追加・編集する
 2. `bundle exec jekyll serve` で確認する
-3. `main` ブランチに commit & push する
-4. GitHub Actions が自動でビルド・デプロイする
+3. 公開プロフィール値と個人情報の混入有無を確認する
+4. `main` ブランチに commit & push する
+5. GitHub Actions が自動でビルド・デプロイする
 
 ## 日常追加時のルール
 
@@ -45,14 +46,15 @@ bundle exec jekyll serve --host 127.0.0.1
 - `published: false` は一覧非表示のための目印であり、強い非公開設定ではない
 - 本当に出力したくない原稿は `draft-private/` に置く（`_config.yml` の exclude で除外済み）
 - 本当に未出力にしたい記事は `_scripts/` の外で管理する
+- 公開サイトに出る表示名や URL は `_config.yml` と `_data/site_profile.yml` の値がそのまま使われる
+- 作業コピーをそのまま共有する場合、`.git/` のログに過去の `user.email` が残ることがあるため、通常は `.git/` を除外して共有する
 - 将来的に公開用の自動コピー処理を入れるまでは、運用で分離する前提にする
 
-## 現在のローカル状態
+## Git 接続時の確認事項
 
-現時点では、ローカル Git リポジトリの初期化は完了しています。
+GitHub へ push する前に、次を確認します。
 
-- ブランチは `main`
-- `remote` は未設定
-- 公開先の GitHub アカウントはまだ未決定
-
-このため、しばらくはローカル保存だけ進めて、最後に GitHub 側へ接続する進め方ができます。
+- `origin` が意図した公開先リポジトリを向いている
+- push に使う GitHub アカウントが公開先の運用方針に合っている
+- `git config user.name` と `git config user.email` が意図した公開者情報になっている
+- 作業コピーを外部共有する場合は `.git/` を含めない
