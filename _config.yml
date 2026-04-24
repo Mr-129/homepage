@@ -12,7 +12,7 @@ theme_stylesheet: /assets/css/themes/copper-file.css
 collections:
   scripts:
     output: true
-    permalink: /scripts/:name/
+    permalink: /scripts/:path/
 
 defaults:
   - scope:
