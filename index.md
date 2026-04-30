@@ -3,6 +3,10 @@ title: Home
 description: 使用したスクリプトを整理して残すためのJekyllベースの個人サイト
 layout: default
 ---
+{% comment %}
+  トップページの「現在の保管棚」は手書きではなく、公開済み記事から自動生成する。
+  shelf が無い既存記事でも表示できるように、category を棚名の代替として使う。
+{% endcomment %}
 {% assign visible_scripts = site.scripts | where_exp: 'item', 'item.published == true' %}
 {% assign all_shelves = "" | split: "" %}
 {% for script in visible_scripts %}
@@ -27,6 +31,9 @@ layout: default
       <div class="info-card">
         <h2>現在の保管棚</h2>
         {% for shelf in all_shelves %}
+          {% comment %}
+            各棚に何件の記事があるかを数え、一覧ページの shelf フィルタ付き URL へリンクする。
+          {% endcomment %}
           {% assign shelf_count = 0 %}
           {% for s in visible_scripts %}
             {% assign script_shelf = s.shelf | default: s.category | default: '未分類' %}
@@ -54,6 +61,10 @@ layout: default
   </header>
   <div class="section-grid">
     {% for shelf in all_shelves %}
+      {% comment %}
+        下のカード群もトップの保管棚一覧と同じ棚定義を使う。
+        これにより、トップと一覧ページで棚の名前が食い違わない。
+      {% endcomment %}
       {% assign shelf_count = 0 %}
       {% for s in visible_scripts %}
         {% assign script_shelf = s.shelf | default: s.category | default: '未分類' %}

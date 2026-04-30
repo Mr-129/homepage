@@ -1,4 +1,9 @@
-/* Code block toolbar: copy + download buttons */
+/*
+ * Code block toolbar: add copy / download helpers to rendered code blocks.
+ *
+ * This runs after the page is rendered and wraps each <pre> only once.
+ * The original code content stays untouched; we only add surrounding UI.
+ */
 (function () {
   "use strict";
 
@@ -17,6 +22,8 @@
     '<polyline points="7 10 12 15 17 10"/>' +
     '<line x1="12" y1="15" x2="12" y2="3"/></svg>';
 
+  // Map syntax-highlighted language names to download file extensions.
+  // Unknown languages still get a copy button, but download falls back to .txt.
   var LANG_EXT = {
     powershell: ".ps1",
     ps1: ".ps1",
@@ -85,6 +92,7 @@
   function init() {
     var pres = document.querySelectorAll(".prose pre, .content-card pre");
     pres.forEach(function (pre) {
+      // Avoid wrapping the same block twice when init() is called more than once.
       if (pre.parentNode.classList.contains("code-block-wrapper")) return;
 
       var lang = detectLang(pre);
@@ -94,7 +102,7 @@
       pre.parentNode.insertBefore(wrapper, pre);
       wrapper.appendChild(pre);
 
-      /* Language label */
+      /* Language label: mirrors the detected syntax class for quick scanning. */
       if (lang) {
         var label = document.createElement("span");
         label.className = "code-lang-label";
@@ -102,7 +110,7 @@
         wrapper.appendChild(label);
       }
 
-      /* Toolbar */
+      /* Toolbar: buttons are created after the wrapper so they can target this block. */
       var toolbar = document.createElement("div");
       toolbar.className = "code-toolbar";
 
@@ -122,6 +130,7 @@
     });
   }
 
+  // Run immediately on already-rendered pages, or wait for DOMContentLoaded on first load.
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {

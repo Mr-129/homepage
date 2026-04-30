@@ -12,6 +12,8 @@ theme_stylesheet: /assets/css/themes/copper-file.css
 collections:
   scripts:
     output: true
+    # :path を使うと _scripts 配下のサブフォルダ構成まで URL に含まれる。
+    # これで記事数が増えても、同名ファイル衝突を避けながら整理できる。
     permalink: /scripts/:path/
 
 defaults:

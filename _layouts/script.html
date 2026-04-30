@@ -3,6 +3,10 @@ layout: default
 ---
 <article class="shell page-section script-article">
   <header class="section-header">
+    {% comment %}
+      詳細ページでも shelf を優先し、未指定なら category を棚名として表示する。
+      既存記事を一気に移行しなくても本棚表示が成立するための後方互換処理。
+    {% endcomment %}
     {% assign page_shelf = page.shelf | default: page.category %}
     <p class="eyebrow">Script</p>
     <h1>{{ page.title }}</h1>

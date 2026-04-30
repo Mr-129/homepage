@@ -11,7 +11,12 @@ layout: default
     <p class="section-lead">保管しているスクリプトの一覧です。キーワード検索やタグで絞り込めます。</p>
   </header>
 
-  {% comment %} 全棚と全タグを収集してソート {% endcomment %}
+  {% comment %}
+    一覧ページで使う候補を先に集める。
+    - visible_scripts: 公開済みの記事だけ
+    - all_shelves: 表示用の本棚一覧。shelf が無い既存記事は category を棚名として使う
+    - all_tags: タグ絞り込み用の一覧
+  {% endcomment %}
   {% assign visible_scripts = site.scripts | where_exp: 'item', 'item.published == true' %}
   {% assign all_shelves = "" | split: "" %}
   {% assign all_tags = "" | split: "" %}
@@ -59,6 +64,10 @@ layout: default
   <div class="script-grid" id="script-grid">
     {% assign sorted_scripts = visible_scripts | sort: 'title' %}
     {% for script in sorted_scripts %}
+      {% comment %}
+        JavaScript 側の絞り込みで使うため、棚名・タグ・タイトル・概要を data-* 属性へ埋め込む。
+        shelf 未設定の記事でも動くように、ここでも shelf -> category の順で棚名を決める。
+      {% endcomment %}
       {% assign script_shelf = script.shelf | default: script.category | default: '未分類' %}
       <article class="script-card" data-shelf="{{ script_shelf }}" data-tags="{{ script.tags | join: ',' }}" data-title="{{ script.title }}" data-summary="{{ script.summary }}">
         <p class="eyebrow">{{ script.language | default: 'Script' }}</p>
@@ -93,6 +102,7 @@ layout: default
 
 <script>
 (function () {
+  // 棚ボタンとタグボタンは見た目が似ているので、最初に別々の集合として取得する。
   var searchInput = document.getElementById('search-input');
   var shelfButtons = document.querySelectorAll('.shelf-filter-btn');
   var tagButtons = document.querySelectorAll('.tag-filter-btn:not(.shelf-filter-btn)');
@@ -103,7 +113,8 @@ layout: default
   var activeShelf = 'all';
   var activeTag = 'all';
 
-  // URLパラメータから棚とタグを初期選択
+  // URLパラメータから初期状態を復元する。
+  // 例: /scripts/?shelf=Windows%20運用&tag=powershell
   var params = new URLSearchParams(window.location.search);
   var initialShelf = params.get('shelf');
   var initialTag = params.get('tag');
@@ -134,10 +145,12 @@ layout: default
   }
 
   function filterCards() {
+    // 入力欄・本棚・タグの3条件を AND で組み合わせて表示件数を決める。
     var query = (searchInput.value || '').toLowerCase().trim();
     var visibleCount = 0;
 
     cards.forEach(function (card) {
+      // 各カードへ埋め込んだ data-* 属性だけを見れば絞り込みできるようにしている。
       var shelf = (card.getAttribute('data-shelf') || '').toLowerCase();
       var title = (card.getAttribute('data-title') || '').toLowerCase();
       var summary = (card.getAttribute('data-summary') || '').toLowerCase();
@@ -167,6 +180,7 @@ layout: default
 
   searchInput.addEventListener('input', filterCards);
 
+  // 本棚ボタンは1つだけ active にし、クリック後すぐ一覧を再計算する。
   shelfButtons.forEach(function (btn) {
     btn.addEventListener('click', function () {
       activeShelf = btn.getAttribute('data-shelf') || 'all';
@@ -176,6 +190,7 @@ layout: default
     });
   });
 
+  // タグボタンも同じ考え方で active 状態を切り替える。
   tagButtons.forEach(function (btn) {
     btn.addEventListener('click', function () {
       activeTag = btn.getAttribute('data-tag');
